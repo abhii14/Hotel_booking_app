@@ -68,9 +68,14 @@ hotel_ID = input("Enter the hotel id: ")
 hotel = Hotel(hotel_ID)
 
 if hotel.available():
-    credit_card = SecureCreditCard(number="1234567890123456")
-    if credit_card.validate(expiration="12/26", holder="JOHN SMITH", cvc="123"):
-        if credit_card.authenticate(given_password="mypass"):
+    card_number = input("Enter your credit card number")
+    credit_card = SecureCreditCard(number=card_number)
+    card_expiry = input("Enter the card expiry date")
+    card_name = input("Enter the name on card")
+    card_cvc = input("Enter your card cvc")
+    if credit_card.validate(expiration=card_expiry, holder=card_name, cvc=card_cvc):
+        passw = input("Enter your password")
+        if credit_card.authenticate(given_password=passw):
             hotel.book()
             name = input("Enter your Name: ")
             reservation_ticket = ReservationTicket(costumer_name=name, hotel_object=hotel)
